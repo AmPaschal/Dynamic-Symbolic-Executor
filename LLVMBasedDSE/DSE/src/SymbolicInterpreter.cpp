@@ -20,6 +20,7 @@ int SymbolicInterpreter::NewInput(int *Ptr, int ID) {
     Ret = std::rand();
     Inputs[ID] = Ret;
   }
+
   Address X(Ptr);
   std::string InputName = "X" + std::to_string(NumOfInputs);
   z3::expr SE = Ctx.int_const(InputName.c_str());

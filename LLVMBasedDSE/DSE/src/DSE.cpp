@@ -18,8 +18,8 @@ void storeInput() {
     const z3::func_decl E = Model[I];
     z3::expr Input = Model.get_const_interp(E);
     if (Input.kind() == Z3_NUMERAL_AST) {
-      int I = Input.get_numeral_int();
-      OS << E.name() << "," << I << std::endl;
+      int numeral = Input.get_numeral_int();
+      OS << E.name() << "," << numeral << std::endl;
     }
   }
 }
@@ -29,7 +29,9 @@ void printNewPathCondition(z3::expr_vector &Vec) {
   Log.open(LogFile, std::ofstream::out | std::ofstream::app);
   Log << std::endl;
   Log << "=== New Path Condition ===" << std::endl;
+  std::cout << "Print here1" << "\n";
   for (auto E : Vec) {
+      std::cout << "Print here2" << "\n";
     Log << E << std::endl;
   }
 }
@@ -38,7 +40,10 @@ void generateInput() {
   z3::expr_vector Vec = Ctx.parse_file(FormulaFile);
 
   while (true) {
+      std::cout << "Print here" << "\n";
     searchStrategy(Vec);
+
+    Solver.reset();
 
     for (const auto &E : Vec) {
       Solver.add(E);
@@ -48,8 +53,19 @@ void generateInput() {
       storeInput();
       printNewPathCondition(Vec);
       break;
+    } else {
+        printNewPathCondition(Vec);
+        std::cout << "Unsatisfied" << "\n";
+        break;
     }
   }
+}
+
+void checkAndDeleteFiles() {
+    remove(BranchFile);
+    remove(FormulaFile);
+    remove(LogFile);
+    remove(InputFile);
 }
 
 int main(int argc, char **argv) {
@@ -63,6 +79,8 @@ int main(int argc, char **argv) {
     std::cerr << argv[1] << " not found\n" << std::endl;
     return 1;
   }
+
+  checkAndDeleteFiles();
 
   int MaxIter = INT_MAX;
   if (argc == 3) {

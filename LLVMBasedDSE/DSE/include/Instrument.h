@@ -49,5 +49,23 @@ struct Instrument : public FunctionPass {
   Instrument() : FunctionPass(ID) {}
 
   bool runOnFunction(Function &F) override;
+
+    void insertInitFunctionDeclaration(const Function &F, Module *module);
+
+    void insertAllocaFunctionDeclaration(const Function &F, Module *module);
+
+    void insertStoreFunctionDeclaration(const Function &F, Module *module);
+
+    void insertLoadFunctionDeclaration(const Function &F, Module *module);
+
+    void insertConstFunctionDeclaration(const Function &F, Module *module);
+
+    void insertRegisterFunctionDeclaration(const Function &F, Module *module);
+
+    void insertIcmpFunctionDeclaration(const Function &F, Module *module);
+
+    void insertBranchFunctionDeclaration(const Function &F, Module *module);
+
+    void insertBinOpFunctionDeclaration(const Function &F, Module *module);
 };
 } // namespace instrument

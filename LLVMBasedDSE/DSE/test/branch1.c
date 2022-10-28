@@ -14,5 +14,8 @@ int main() {
 	x = x / (y-z);
   }
 
+    if (y == 5) {
+        y = 5;
+    }
   return 0;
 }

@@ -16,5 +16,9 @@ int main() {
 	 }
   }
 
+  if (y == 5) {
+    y = 0;
+  }
+
   return 0;
 }
