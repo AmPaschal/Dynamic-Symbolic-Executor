@@ -2,7 +2,7 @@
 Assignment for implementing dynamic symbolic execution.
 
 Dynamic Symbolic execution is a form of automated software testing, where we systematically generate inputs that 
-can explore all paths in the program.
+can explore all paths in the program. This can reveal inputs that cause a program to crash.
 
 The tasks completed in this assignment include:
 1. Implemented **src/Instrument.cpp** to automatically add DSE-enabling functions during compilation.
